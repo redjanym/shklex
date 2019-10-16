@@ -1,0 +1,11 @@
+{% extends "base.html.twig" %}
+{% block page_header %}Models{% endblock %}
+{% block page_header_description %}deleting a model{% endblock %}
+{% block breadcrumb_active %}Models{% endblock %}
+{% block body_title %}Please confirm if you need to delete the model or not{% endblock %}
+
+{% block body_content %}
+    <form action="{{ path('app_model_delete', {"id": model.id}) }}" method="post">
+        <button class="btn btn-danger" type="submit">Delete</button> or <a href="{{ path('app_model_index') }}" class="btn btn-default">DO NOT DELETE</a>
+    </form>
+{% endblock %}
