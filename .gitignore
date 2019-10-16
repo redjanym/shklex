@@ -50,3 +50,4 @@
 /.web-server-pid
 
 .idea/
+/public/bower_components/
