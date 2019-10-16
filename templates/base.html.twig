@@ -6,17 +6,17 @@
     <title>{% block title %}Welcome to Shklex{% endblock %}</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ asset('bower_components/bootstrap//dist/css/bootstrap.min.css') }}">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ asset('bower_components/font-awesome/css/font-awesome.min.css') }}">
     <!-- Ionicons -->
-    <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="{{ asset('bower_components/Ionicons/css/ionicons.min.css') }}">
     <!-- Theme style -->
-    <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="{{ asset('dist/css/AdminLTE.min.css') }}">
     <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
           page. However, you can choose any other skin. Make sure you
           apply the skin class to the body tag so the changes take effect. -->
-    <link rel="stylesheet" href="dist/css/skins/skin-blue.min.css">
+    <link rel="stylesheet" href="{{ asset('dist/css/skins/skin-blue.min.css') }}">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -84,7 +84,7 @@ desired effect
                         <ul class="dropdown-menu">
                             <!-- The user image in the menu -->
                             <li class="user-header">
-                                <img src="dist/img/avatar.jpeg" class="img-circle" alt="User Image">
+                                <img src="{{ asset('dist/img/avatar.jpeg') }}" class="img-circle" alt="User Image">
 
                                 <p>
                                     Redjan Ymeraj - Web Developer
@@ -111,7 +111,7 @@ desired effect
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel">
                 <div class="pull-left image">
-                    <img src="dist/img/avatar.jpeg" class="img-circle" alt="User Image">
+                    <img src="{{ asset('dist/img/avatar.jpeg') }}" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
                     <p>Anonymus</p>
@@ -125,6 +125,9 @@ desired effect
                 <li class="header">Dashboard</li>
                 <!-- Optionally, you can add icons to the links -->
                 <li class="active"><a href="{{ path('app_dashboard_index') }}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+                <li><a href="{{ path('app_model_index') }}"><i class="fa fa-list"></i> <span>Models</span></a></li>
+
+                {{ render_sidebar() }}
             </ul>
             <!-- /.sidebar-menu -->
         </section>
@@ -150,12 +153,13 @@ desired effect
             {% block body %}
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                        <h3 class="box-title">{% block body_content_title %}Models{% endblock %}</h3>
+                        <h3 class="box-title">{% block body_title %}Models{% endblock %}</h3>
+                        {% block body_toolbox %}{% endblock %}
                     </div>
 
                     <div class="box-body">
                         {% block body_content %}
-
+                            Quick link for list of <a href="{{ path('app_model_index') }}">models</a>
                         {% endblock %}
                     </div>
 
@@ -184,11 +188,11 @@ desired effect
 <!-- REQUIRED JS SCRIPTS -->
 
 <!-- jQuery 3 -->
-<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="{{ asset('bower_components/jquery/dist/jquery.min.js') }}"></script>
 <!-- Bootstrap 3.3.7 -->
-<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="{{ asset('bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 <!-- AdminLTE App -->
-<script src="dist/js/adminlte.min.js"></script>
+<script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
