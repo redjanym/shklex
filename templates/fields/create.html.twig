@@ -1,0 +1,154 @@
+{% extends "base.html.twig" %}
+{% block page_header %}Fields of model <b>{{ model.name }}</b>{% endblock %}
+{% block page_header_description %}editing model fields{% endblock %}
+{% block breadcrumb_active %}Model{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Add all the necessary information</h3>
+                </div>
+                <form action="{{ path('app_fields_update', {"modelId": model.id}) }}" method="post"
+                      class="form-horizontal">
+                    <div class="box-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Delete</th>
+                                    <th>Form Title</th>
+                                    <th>List Title</th>
+                                    <th>Show Title</th>
+                                    <th>Type</th>
+                                    <th>Available in list</th>
+                                    <th>Available in show</th>
+                                    <th>Available in create</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for field in fields %}
+                                    <input type="hidden" name="fields[{{ field.id }}][id]" value="{{ field.id }}">
+                                    <tr>
+                                        <td>
+                                            <input type="checkbox"
+                                                   name="fields[{{ field.id }}][delete]">
+                                        </td>
+                                        <td>
+                                            <input type="text" name="fields[{{ field.id }}][title]" class="form-control"
+                                                   value="{{ field.title }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" name="fields[{{ field.id }}][list_title]"
+                                                   class="form-control" value="{{ field.listTitle }}">
+                                        </td>
+                                        <td>
+                                            <input type="text" name="fields[{{ field.id }}][show_title]"
+                                                   class="form-control" value="{{ field.showTitle }}">
+                                        </td>
+                                        <td>
+                                            <select name="fields[{{ field.id }}][type]" class="form-control">
+                                                <option value="{{ constant('App\\Entity\\Field::TYPE_STRING') }}"
+                                                        {% if field.type == constant('App\\Entity\\Field::TYPE_STRING') %}selected{% endif %}>
+                                                    String
+                                                </option>
+                                                <option value="{{ constant('App\\Entity\\Field::TYPE_TEXT') }}"
+                                                        {% if field.type == constant('App\\Entity\\Field::TYPE_TEXT') %}selected{% endif %}>
+                                                    Text
+                                                </option>
+                                                <option value="{{ constant('App\\Entity\\Field::TYPE_NUMBER') }}"
+                                                        {% if field.type == constant('App\\Entity\\Field::TYPE_NUMBER') %}selected{% endif %}>
+                                                    Number
+                                                </option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input type="checkbox"
+                                                   name="fields[{{ field.id }}][available_in_list]" {{ field.availableInList ? "checked" : "" }}>
+                                        </td>
+                                        <td>
+                                            <input type="checkbox"
+                                                   name="fields[{{ field.id }}][available_in_show]" {{ field.availableInShow ? "checked" : "" }}>
+                                        </td>
+                                        <td>
+                                            <input type="checkbox"
+                                                   name="fields[{{ field.id }}][available_in_create]" {{ field.availableInCreate ? "checked" : "" }}>
+                                        </td>
+                                    </tr>
+
+                                {% else %}
+                                    <tr>
+                                        <td colspan="8" class="text-center">
+                                            <p>This model does not have any existing fields!</p>
+                                        </td>
+                                    </tr>
+                                 {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="box-footer">
+                        <a class="btn btn-default" href="{{ path('app_model_index') }}">Go to list</a>
+                        <button type="submit" class="btn btn-success pull-right">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Add all the necessary information</h3>
+                </div>
+                {{ form_start(form, {"attr": {"class": "form-horizontal"}}) }}
+                <div class="box-body">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Title</label>
+                        <div class="col-sm-8">
+                            {{ form_widget(form.title, {"attr": {"class": "form-control"}}) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">List Title</label>
+                        <div class="col-sm-8">
+                            {{ form_widget(form.listTitle, {"attr": {"class": "form-control"}}) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Show Title</label>
+                        <div class="col-sm-8">
+                            {{ form_widget(form.showTitle, {"attr": {"class": "form-control"}}) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Type</label>
+                        <div class="col-sm-8">
+                            {{ form_widget(form.type, {"attr": {"class": "form-control"}}) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Available in list</label>
+                        <div class="col-sm-8">
+                            {{ form_widget(form.availableInList) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Available in show</label>
+                        <div class="col-sm-8">
+                            {{ form_widget(form.availableInShow) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Available in create</label>
+                        <div class="col-sm-8">
+                            {{ form_widget(form.availableInCreate) }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="box-footer">
+                    <button class="btn btn-primary btn-block"><i class="fa fa-plus"></i> Add new field</button>
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

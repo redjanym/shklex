@@ -53,12 +53,13 @@ class ModelController extends AbstractController
                 $this->getDoctrine()->getManager()->persist($model);
                 $this->getDoctrine()->getManager()->flush();
 
-                return $this->redirectToRoute("app_model_index");
+                return $this->redirectToRoute("app_model_create", array("id" => $model->getId()));
             }
         }
 
         return $this->render("model/create.html.twig", array(
-            "form" => $form->createView()
+            "form" => $form->createView(),
+            "model" => $model
         ));
     }
     /**
