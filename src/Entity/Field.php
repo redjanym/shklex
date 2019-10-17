@@ -68,4 +68,105 @@ class Field implements FieldInterface
         $this->availableInShow = true;
         $this->availableInCreate = true;
     }
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(string $title): self
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    public function getListTitle(): ?string
+    {
+        return $this->listTitle;
+    }
+
+    public function setListTitle(?string $listTitle): self
+    {
+        $this->listTitle = $listTitle;
+
+        return $this;
+    }
+
+    public function getShowTitle(): ?string
+    {
+        return $this->showTitle;
+    }
+
+    public function setShowTitle(?string $showTitle): self
+    {
+        $this->showTitle = $showTitle;
+
+        return $this;
+    }
+
+    public function getType(): ?int
+    {
+        return $this->type;
+    }
+
+    public function setType(int $type): self
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    public function getAvailableInList(): ?bool
+    {
+        return $this->availableInList;
+    }
+
+    public function setAvailableInList(bool $availableInList): self
+    {
+        $this->availableInList = $availableInList;
+
+        return $this;
+    }
+
+    public function getAvailableInShow(): ?bool
+    {
+        return $this->availableInShow;
+    }
+
+    public function setAvailableInShow(bool $availableInShow): self
+    {
+        $this->availableInShow = $availableInShow;
+
+        return $this;
+    }
+
+    public function getAvailableInCreate(): ?bool
+    {
+        return $this->availableInCreate;
+    }
+
+    public function setAvailableInCreate(bool $availableInCreate): self
+    {
+        $this->availableInCreate = $availableInCreate;
+
+        return $this;
+    }
+
+    public function getModel(): ?Model
+    {
+        return $this->model;
+    }
+
+    public function setModel(?Model $model): self
+    {
+        $this->model = $model;
+
+        return $this;
+    }
 }
