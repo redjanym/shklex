@@ -29,3 +29,8 @@ services:
         arguments:
             $manager: "@doctrine.orm.entity_manager"
             $router: "@router"
+
+    App\Twig\CRUDExtension:
+        arguments:
+            $manager: "@doctrine.orm.entity_manager"
+            $router: "@router"

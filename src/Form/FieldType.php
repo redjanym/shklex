@@ -37,6 +37,9 @@ class FieldType extends AbstractType
                 ),
                 "by_reference" => true
             ))
+            ->add('required', CheckboxType::class, array(
+                "required" => false
+            ))
             ->add('availableInList', CheckboxType::class, array(
                 "required" => false
             ))

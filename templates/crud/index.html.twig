@@ -11,35 +11,35 @@
 {% endblock %}
 
 {% block body_content %}
-{#    <table class="table">#}
-{#        <thead>#}
-{#            <tr>#}
-{#                <th>Id</th>#}
-{#                <th>Name</th>#}
-{#                <th>Visible in Sidebar</th>#}
-{#                <th></th>#}
-{#            </tr>#}
-{#        </thead>#}
+    <table class="table">
+        <thead>
+            <tr>
+                {% for field in fields %}
+                    <th>{{ field.title }}</th>
+                {% endfor %}
+                <th></th>
+            </tr>
+        </thead>
 
-{#        <tbody>#}
-{#            {% for model in models %}#}
-{#                <tr>#}
-{#                    <td>{{ model.id }}</td>#}
-{#                    <td>{{ model.name }}</td>#}
-{#                    <td>{{ bool_view(model.visibleInSidebar) }}</td>#}
-{#                    <td>#}
-{#                        <div class="btn-group">#}
-{#                            <a href="{{ path('app_fields_create', {"modelId": model.id}) }}" class="btn btn-xs btn-primary">Fields</a>#}
-{#                            <a href="{{ path('app_model_create', {"id": model.id}) }}" class="btn btn-xs btn-default">Edit</a>#}
-{#                            <a href="{{ path('app_model_delete', {"id": model.id}) }}" class="btn btn-xs btn-danger">Delete</a>#}
-{#                        </div>#}
-{#                    </td>#}
-{#                </tr>#}
-{#            {% else %}#}
-{#                <tr>#}
-{#                    <td colspan="4" class="text-center">No models available</td>#}
-{#                </tr>#}
-{#            {% endfor %}#}
-{#        </tbody>#}
-{#    </table>#}
+        <tbody>
+            {% for value in values %}
+                <tr>
+                    {% for field in fields %}
+                        <td>{{ value[field.id] }}</td>
+                    {% endfor %}
+
+                    <td>
+                        <div class="btn-group">
+                            <a href="{{ path('app_model_create', {"id": model.id}) }}" class="btn btn-xs btn-default">Edit</a>
+                            <a href="{{ path('app_model_delete', {"id": model.id}) }}" class="btn btn-xs btn-danger">Delete</a>
+                        </div>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="{{ fields | length + 1 }}" class="text-center">No values available</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}

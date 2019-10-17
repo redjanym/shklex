@@ -48,6 +48,11 @@ class Field implements FieldInterface
     protected $type;
 
     /**
+     * @ORM\Column(name="required", type="boolean")
+     */
+    protected $required;
+
+    /**
      * @ORM\Column(name="available_in_list", type="boolean")
      */
     protected $availableInList;
@@ -166,6 +171,18 @@ class Field implements FieldInterface
     public function setModel(?Model $model): self
     {
         $this->model = $model;
+
+        return $this;
+    }
+
+    public function getRequired(): ?bool
+    {
+        return $this->required;
+    }
+
+    public function setRequired(bool $required): self
+    {
+        $this->required = $required;
 
         return $this;
     }
