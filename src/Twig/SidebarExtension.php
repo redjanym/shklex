@@ -51,7 +51,7 @@ class SidebarExtension extends AbstractExtension
          * @var Model $model
          */
         foreach ($modelsVisibleInSidebar as $model) {
-            $template .= sprintf("<li><a href=\"%s\"><i class=\"fa fa-plus\"></i> <span>%s</span></a></li>", $this->router->generate("app_model_index"), $model->getName());
+            $template .= sprintf("<li><a href=\"%s\"><i class=\"fa fa-plus\"></i> <span>%s</span></a></li>", $this->router->generate("app_crud_index", array("modelId" => $model->getId())), $model->getName());
         }
 
         return $template;
