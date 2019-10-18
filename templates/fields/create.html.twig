@@ -21,7 +21,7 @@
                                     <th>List Title</th>
                                     <th>Show Title</th>
                                     <th>Type</th>
-                                    <th>Fields</th>
+                                    <th>Required</th>
                                     <th>Available in list</th>
                                     <th>Available in show</th>
                                     <th>Available in create</th>
@@ -104,60 +104,60 @@
                     <h3 class="box-title">Add all the necessary information</h3>
                 </div>
                 {{ form_start(form, {"attr": {"class": "form-horizontal"}}) }}
-                <div class="box-body">
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label">Title</label>
-                        <div class="col-sm-8">
-                            {{ form_widget(form.title, {"attr": {"class": "form-control"}}) }}
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Title</label>
+                            <div class="col-sm-8">
+                                {{ form_widget(form.title, {"attr": {"class": "form-control"}}) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">List Title</label>
+                            <div class="col-sm-8">
+                                {{ form_widget(form.listTitle, {"attr": {"class": "form-control"}}) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Show Title</label>
+                            <div class="col-sm-8">
+                                {{ form_widget(form.showTitle, {"attr": {"class": "form-control"}}) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Type</label>
+                            <div class="col-sm-8">
+                                {{ form_widget(form.type, {"attr": {"class": "form-control"}}) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Required</label>
+                            <div class="col-sm-8">
+                                {{ form_widget(form.required) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Available in list</label>
+                            <div class="col-sm-8">
+                                {{ form_widget(form.availableInList) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Available in show</label>
+                            <div class="col-sm-8">
+                                {{ form_widget(form.availableInShow) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Available in create</label>
+                            <div class="col-sm-8">
+                                {{ form_widget(form.availableInCreate) }}
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label">List Title</label>
-                        <div class="col-sm-8">
-                            {{ form_widget(form.listTitle, {"attr": {"class": "form-control"}}) }}
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label">Show Title</label>
-                        <div class="col-sm-8">
-                            {{ form_widget(form.showTitle, {"attr": {"class": "form-control"}}) }}
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label">Type</label>
-                        <div class="col-sm-8">
-                            {{ form_widget(form.type, {"attr": {"class": "form-control"}}) }}
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label">Required</label>
-                        <div class="col-sm-8">
-                            {{ form_widget(form.required) }}
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label">Available in list</label>
-                        <div class="col-sm-8">
-                            {{ form_widget(form.availableInList) }}
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label">Available in show</label>
-                        <div class="col-sm-8">
-                            {{ form_widget(form.availableInShow) }}
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label">Available in create</label>
-                        <div class="col-sm-8">
-                            {{ form_widget(form.availableInCreate) }}
-                        </div>
-                    </div>
-                </div>
 
-                <div class="box-footer">
-                    <button class="btn btn-primary btn-block"><i class="fa fa-plus"></i> Add new field</button>
-                </div>
+                    <div class="box-footer">
+                        <button class="btn btn-primary btn-block"><i class="fa fa-plus"></i> Add new field</button>
+                    </div>
                 {{ form_end(form) }}
             </div>
         </div>

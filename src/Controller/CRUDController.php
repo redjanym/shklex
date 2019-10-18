@@ -142,8 +142,35 @@ class CRUDController extends AbstractController
         ));
     }
 
+    /**
+     * @Route("/delete/{modelId}/{transactionId}")
+     * @Method({"GET", "POST"})
+     */
+    public function deleteAction(Request $request, $modelId, $transactionId)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $model = $entityManager->getRepository(Model::class)->find($modelId);
+
+        if($request->getMethod() == "POST"){
+            $this->deleteExistingFieldValuesPerTransaction($transactionId);
+            $this->deleteTransaction($transactionId);
+
+            return $this->redirectToRoute("app_crud_index", array("modelId" => $modelId));
+        }
+
+        return $this->render("crud/delete.html.twig", array(
+            "model" => $model,
+            "transaction_id" => $transactionId
+        ));
+    }
+
     public function deleteExistingFieldValuesPerTransaction($transactionId)
     {
         $this->getDoctrine()->getConnection()->executeQuery(sprintf("DELETE FROM field_value WHERE transaction_id = %d", $transactionId));
+    }
+
+    public function deleteTransaction($transactionId)
+    {
+        $this->getDoctrine()->getConnection()->executeQuery(sprintf("DELETE FROM field_transaction WHERE id = %d", $transactionId));
     }
 }

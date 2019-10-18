@@ -1,0 +1,11 @@
+{% extends "base.html.twig" %}
+{% block page_header %}Models{% endblock %}
+{% block page_header_description %}deleting {{ model.name }} row{% endblock %}
+{% block breadcrumb_active %}Models{% endblock %}
+{% block body_title %}Please confirm if you need to delete the row or not{% endblock %}
+
+{% block body_content %}
+    <form action="{{ path('app_crud_delete', {"modelId": model.id, "transactionId": transaction_id}) }}" method="post">
+        <button class="btn btn-danger" type="submit">Delete</button> or <a href="{{ path('app_crud_index', {"modelId": model.id}) }}" class="btn btn-default">DO NOT DELETE</a>
+    </form>
+{% endblock %}
