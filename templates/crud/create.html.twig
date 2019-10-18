@@ -5,13 +5,13 @@
 {% block body_title %}Add all the necessary information{% endblock %}
 
 {% block body_content %}
-    {{ start_crud_form(model) }}
+    {{ start_crud_form(model, transaction_id) }}
         <div class="box-body">
-            {{ render_crud_form(model) }}
+            {{ render_crud_form(model, transaction_id) }}
         </div>
         <div class="box-footer">
             <a class="btn btn-default" href="{{ path('app_crud_index', {"modelId": model.id}) }}">Go to list</a>
-            <button type="submit" class="btn btn-success pull-right">Create</button>
+            <button type="submit" class="btn btn-success pull-right">{{ transaction_id ? "Update" : "Create" }}</button>
         </div>
     {{ end_crud_form() }}
 {% endblock %}

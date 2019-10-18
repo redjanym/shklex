@@ -7,6 +7,7 @@ namespace App\Twig;
 
 
 use App\Entity\Field;
+use App\Entity\FieldValue;
 use App\Entity\Model;
 use App\Model\FieldInterface;
 use Doctrine\ORM\EntityManager;
@@ -47,9 +48,9 @@ class CRUDExtension extends AbstractExtension
         );
     }
 
-    public function startCRUDForm(Model $model)
+    public function startCRUDForm(Model $model, $transactionId = null)
     {
-        return sprintf("<form method='post' action='%s' class='form-horizontal'>", $this->router->generate("app_crud_save", array("modelId" => $model->getId())));
+        return sprintf("<form method='post' action='%s' class='form-horizontal'>", $this->router->generate("app_crud_save", array("modelId" => $model->getId(), "transactionId" => $transactionId)));
     }
 
     public function endCRUDForm()
@@ -57,7 +58,7 @@ class CRUDExtension extends AbstractExtension
         return "</form>";
     }
 
-    public function renderCRUDForm(Model $model)
+    public function renderCRUDForm(Model $model, $transactionId = null)
     {
         $fields = $this->manager->getRepository(Field::class)->findBy(array(
             "model" => $model,
@@ -70,6 +71,16 @@ class CRUDExtension extends AbstractExtension
          * @var Field $field
          */
         foreach ($fields as $field) {
+            $valueEntity = $this->manager->getRepository(FieldValue::class)->findOneBy(array(
+                "field" => $field,
+                "transaction" => $transactionId
+            ));
+
+            $value = null;
+            if($valueEntity){
+                $value = $valueEntity->getValue();
+            }
+
             $required = $field->getRequired() ? "required" : "";
 
             $form .= <<<PHP
@@ -80,15 +91,15 @@ class CRUDExtension extends AbstractExtension
 PHP;
             if($field->getType() == FieldInterface::TYPE_STRING){
                 $form .= <<<PHP
-                <input type="text" name="crud_form[{$field->getId()}]" id="crud_form[{$field->getId()}]" {$required} class="form-control">
+                <input type="text" name="crud_form[{$field->getId()}]" id="crud_form[{$field->getId()}]" {$required} class="form-control" value="{$value}">
 PHP;
             } else if($field->getType() == FieldInterface::TYPE_TEXT){
                 $form .= <<<PHP
-                <textarea name="crud_form[{$field->getId()}]" id="crud_form[{$field->getId()}]" {$required} class="form-control"></textarea>
+                <textarea name="crud_form[{$field->getId()}]" id="crud_form[{$field->getId()}]" {$required} class="form-control">{$value}</textarea>
 PHP;
             } else if($field->getType() == FieldInterface::TYPE_NUMBER){
                 $form .= <<<PHP
-                <input type="number" name="crud_form[{$field->getId()}]" id="crud_form[{$field->getId()}]" {$required} class="form-control">
+                <input type="number" name="crud_form[{$field->getId()}]" id="crud_form[{$field->getId()}]" {$required} class="form-control" value="{$value}">
 PHP;
             }
 

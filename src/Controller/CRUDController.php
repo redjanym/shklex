@@ -86,25 +86,30 @@ class CRUDController extends AbstractController
         $model = $entityManager->getRepository(Model::class)->find($modelId);
 
         return $this->render("crud/create.html.twig", array(
-            "model" => $model
+            "model" => $model,
+            "transaction_id" => null
         ));
     }
 
     /**
-     * @Route("/save/{modelId}")
+     * @Route("/save/{modelId}/{transactionId}")
      * @Method("POST")
      */
-    public function saveAction(Request $request, $modelId)
+    public function saveAction(Request $request, $modelId, $transactionId = null)
     {
         // @todo ADD VALIDATIONS
         $entityManager = $this->getDoctrine()->getManager();
         $model = $entityManager->getRepository(Model::class)->find($modelId);
         $formData = new ParameterBag($request->request->get("crud_form"));
 
-        // @todo delete existing values
-        $transaction = new FieldTransaction();
-        $transaction->setCreatedAt(new \DateTime());
-        $entityManager->persist($transaction);
+        if($transactionId){
+            $transaction = $entityManager->getRepository(FieldTransaction::class)->find($transactionId);
+            $this->deleteExistingFieldValuesPerTransaction($transactionId);
+        } else {
+            $transaction = new FieldTransaction();
+            $transaction->setCreatedAt(new \DateTime());
+            $entityManager->persist($transaction);
+        }
 
         foreach ($formData as $fieldId => $fieldData) {
             $field = $entityManager->getRepository(Field::class)->find($fieldId);
@@ -120,5 +125,25 @@ class CRUDController extends AbstractController
         $entityManager->flush();
 
         return $this->redirectToRoute("app_crud_index", array("modelId" => $modelId));
+    }
+
+    /**
+     * @Route("/update/{modelId}/{transactionId}")
+     * @Method("GET")
+     */
+    public function updateAction(Request $request, $modelId, $transactionId)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $model = $entityManager->getRepository(Model::class)->find($modelId);
+
+        return $this->render("crud/create.html.twig", array(
+            "model" => $model,
+            "transaction_id" => $transactionId
+        ));
+    }
+
+    public function deleteExistingFieldValuesPerTransaction($transactionId)
+    {
+        $this->getDoctrine()->getConnection()->executeQuery(sprintf("DELETE FROM field_value WHERE transaction_id = %d", $transactionId));
     }
 }

@@ -5,14 +5,13 @@
 
 namespace App\Entity;
 
-use App\Model\FieldInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\FieldTransactionRepository")
  * @ORM\Table(name="field_transaction")
  */
-class FieldTransaction implements FieldInterface
+class FieldTransaction
 {
     /**
      * @ORM\Column(name="id", type="integer")
