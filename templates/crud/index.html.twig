@@ -25,7 +25,7 @@
             {% for transactionId, value in values %}
                 <tr>
                     {% for field in fields %}
-                        <td>{{ value[field.id] }}</td>
+                        <td>{{ value[field.id] | default(null) }}</td>
                     {% endfor %}
 
                     <td>

@@ -101,6 +101,21 @@ PHP;
                 $form .= <<<PHP
                 <input type="number" name="crud_form[{$field->getId()}]" id="crud_form[{$field->getId()}]" {$required} class="form-control" value="{$value}">
 PHP;
+            } else if($field->getType() == FieldInterface::TYPE_CHOICE){
+                $form .= <<<PHP
+                <select name="crud_form[{$field->getId()}]" id="crud_form[{$field->getId()}]" {$required} class="form-control">
+                <option value="">Select a value</option>
+PHP;
+                foreach ($field->getChoicesAsArray() as $choice) {
+                    $selected = $value == $choice ? "selected" : "";
+
+                    $form .= <<<PHP
+                <option value="{$choice}" {$selected}>{$choice}</option>
+PHP;
+                }
+                $form .= <<<PHP
+                </select>
+PHP;
             }
 
             $form .= "</div></div>";

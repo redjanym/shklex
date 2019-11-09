@@ -44,7 +44,8 @@ class CRUDController extends AbstractController
         }, $transactions->getItems());
 
         $fields = $entityManager->getRepository(Field::class)->findBy(array(
-            "model" =>$model
+            "model" => $model,
+            "availableInList" => true
         ));
         $rawFieldValues = $entityManager->getRepository(FieldValue::class)->findBy(array(
             "transaction" => $transactionIds

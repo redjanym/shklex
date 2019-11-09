@@ -48,6 +48,16 @@ class Field implements FieldInterface
     protected $type;
 
     /**
+     * @ORM\Column(name="choices", type="text", nullable=true)
+     */
+    protected $choices;
+
+    /**
+     * @ORM\Column(name="multiple", type="boolean")
+     */
+    protected $multiple;
+
+    /**
      * @ORM\Column(name="required", type="boolean")
      */
     protected $required;
@@ -183,6 +193,35 @@ class Field implements FieldInterface
     public function setRequired(bool $required): self
     {
         $this->required = $required;
+
+        return $this;
+    }
+
+    public function getChoices(): ?string
+    {
+        return $this->choices;
+    }
+
+    public function getChoicesAsArray(): ?array
+    {
+        return explode("|", $this->choices);
+    }
+
+    public function setChoices(?string $choices): self
+    {
+        $this->choices = $choices;
+
+        return $this;
+    }
+
+    public function getMultiple(): ?bool
+    {
+        return $this->multiple;
+    }
+
+    public function setMultiple(bool $multiple): self
+    {
+        $this->multiple = $multiple;
 
         return $this;
     }

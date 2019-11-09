@@ -96,9 +96,7 @@ class FieldsController extends AbstractController
 
     private function isFieldValid(ParameterBag $fieldData)
     {
-        return $fieldData->getAlnum("title") &&
-            in_array(intval($fieldData->getInt("type")), array(FieldInterface::TYPE_STRING, FieldInterface::TYPE_TEXT, FieldInterface::TYPE_NUMBER))
-            ;
+        return $fieldData->getAlnum("title") && in_array(intval($fieldData->getInt("type")), array(FieldInterface::TYPE_STRING, FieldInterface::TYPE_TEXT, FieldInterface::TYPE_NUMBER, FieldInterface::TYPE_CHOICE));
     }
 
     private function updateField(Field $field, ParameterBag $fieldData)
@@ -108,6 +106,8 @@ class FieldsController extends AbstractController
             ->setListTitle($fieldData->get("list_title"))
             ->setShowTitle($fieldData->get("show_title"))
             ->setType($fieldData->getInt("type"))
+            ->setChoices(trim($fieldData->get("choices")))
+            ->setMultiple($fieldData->get("multiple") == "on")
             ->setRequired($fieldData->get("required") == "on")
             ->setAvailableInList($fieldData->get("available_in_list") == "on")
             ->setAvailableInShow($fieldData->get("available_in_show") == "on")
