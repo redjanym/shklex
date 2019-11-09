@@ -1,7 +1,7 @@
 {% extends "base.html.twig" %}
 {% block page_header %}{{ model.name }}{% endblock %}
-{% block page_header_description %}Creating {{ model.name }}{% endblock %}
-{% block breadcrumb_active %}Models{% endblock %}
+{% block page_header_description %}{{ transaction_id ? "Updating" : "Creating" }}{% endblock %}
+{% block breadcrumb_active %}{{ model.name }}{% endblock %}
 {% block body_title %}Add all the necessary information{% endblock %}
 
 {% block body_content %}

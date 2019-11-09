@@ -1,12 +1,12 @@
 {% extends "base.html.twig" %}
 {% block page_header %}{{ model.name }}{% endblock %}
-{% block page_header_description %}list of all {{ model.name }}{% endblock %}
+{% block page_header_description %}list of all{% endblock %}
 {% block breadcrumb_active %}{{ model.name }}{% endblock %}
-{% block body_title %}View the full list of {{ model.name }}{% endblock %}
+{% block body_title %}View the full list{% endblock %}
 
 {% block body_toolbox %}
     <div class="box-tools">
-        <a href="{{ path('app_crud_create', {"modelId": model.id}) }}" class="btn btn-xs btn-primary">Create new {{ model.name }}</a>
+        <a href="{{ path('app_crud_create', {"modelId": model.id}) }}" class="btn btn-xs btn-primary">Create new</a>
     </div>
 {% endblock %}
 
