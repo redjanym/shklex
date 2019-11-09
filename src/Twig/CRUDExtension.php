@@ -116,6 +116,10 @@ PHP;
                 $form .= <<<PHP
                 </select>
 PHP;
+            } else if($field->getType() == FieldInterface::TYPE_DATETIME){
+                $form .= <<<PHP
+                <input type="date" name="crud_form[{$field->getId()}]" id="crud_form[{$field->getId()}]" {$required} class="form-control" value="{$value}">
+PHP;
             }
 
             $form .= "</div></div>";

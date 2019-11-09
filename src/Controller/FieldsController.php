@@ -96,7 +96,7 @@ class FieldsController extends AbstractController
 
     private function isFieldValid(ParameterBag $fieldData)
     {
-        return $fieldData->getAlnum("title") && in_array(intval($fieldData->getInt("type")), array(FieldInterface::TYPE_STRING, FieldInterface::TYPE_TEXT, FieldInterface::TYPE_NUMBER, FieldInterface::TYPE_CHOICE));
+        return $fieldData->getAlnum("title") && in_array(intval($fieldData->getInt("type")), array(FieldInterface::TYPE_STRING, FieldInterface::TYPE_TEXT, FieldInterface::TYPE_NUMBER, FieldInterface::TYPE_CHOICE, FieldInterface::TYPE_DATETIME));
     }
 
     private function updateField(Field $field, ParameterBag $fieldData)

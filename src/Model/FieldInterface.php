@@ -12,4 +12,5 @@ interface FieldInterface
     const TYPE_TEXT = 2;
     const TYPE_NUMBER = 3;
     const TYPE_CHOICE = 4;
+    const TYPE_DATETIME = 5;
 }

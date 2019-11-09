@@ -35,7 +35,8 @@ class FieldType extends AbstractType
                     "String" => FieldInterface::TYPE_STRING,
                     "Text" => FieldInterface::TYPE_TEXT,
                     "Number" => FieldInterface::TYPE_NUMBER,
-                    "Choice" => FieldInterface::TYPE_CHOICE
+                    "Choice" => FieldInterface::TYPE_CHOICE,
+                    "DateTime" => FieldInterface::TYPE_DATETIME
                 ),
                 "by_reference" => true
             ))
