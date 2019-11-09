@@ -1,11 +1,20 @@
 {
+    "name": "redjanym/shklex",
+    "license": "MIT",
     "type": "project",
-    "license": "proprietary",
+    "description": "A seed web app which provides a framework for simply creating data models with CRUD operations and minimal configuration",
+    "authors": [
+        {
+            "name": "Redjan Ymeraj",
+            "email": "ymerajredjan@gmail.com"
+        }
+    ],
     "require": {
         "php": "^7.1.3",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "doctrine/doctrine-bundle": "^1.11",
+        "knplabs/knp-paginator-bundle": "^4.0",
         "sensio/framework-extra-bundle": "^5.5",
         "symfony/asset": "4.3.*",
         "symfony/console": "4.3.*",

@@ -108,6 +108,7 @@ class FieldsController extends AbstractController
             ->setListTitle($fieldData->get("list_title"))
             ->setShowTitle($fieldData->get("show_title"))
             ->setType($fieldData->getInt("type"))
+            ->setRequired($fieldData->get("required") == "on")
             ->setAvailableInList($fieldData->get("available_in_list") == "on")
             ->setAvailableInShow($fieldData->get("available_in_show") == "on")
             ->setAvailableInCreate($fieldData->get("available_in_create") == "on")

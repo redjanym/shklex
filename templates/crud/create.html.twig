@@ -1,38 +1,17 @@
 {% extends "base.html.twig" %}
-{% block page_header %}Models{% endblock %}
-{% block page_header_description %}{% if model.id %}editing{% else %}creating{% endif %} a model{% endblock %}
-{% block breadcrumb_active %}Models{% endblock %}
+{% block page_header %}{{ model.name }}{% endblock %}
+{% block page_header_description %}{{ transaction_id ? "Updating" : "Creating" }}{% endblock %}
+{% block breadcrumb_active %}{{ model.name }}{% endblock %}
 {% block body_title %}Add all the necessary information{% endblock %}
 
 {% block body_content %}
-
-    {{ form_start(form, {"attr": {"class": "form-horizontal"}}) }}
-
+    {{ start_crud_form(model, transaction_id) }}
         <div class="box-body">
-            <div class="form-group">
-                <label for="name" class="col-sm-2 control-label">Name</label>
-
-                <div class="col-sm-10">
-                    {{ form_widget(form.name, {"attr": {"class": "form-control"}}) }}
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="visible_in_sidebar" class="col-sm-2 control-label">Visible in sidebar</label>
-
-                <div class="col-sm-10">
-                    <div class="checkbox">
-                        <label>
-                            {{ form_widget(form.visibleInSidebar) }}
-                        </label>
-                    </div>
-                </div>
-            </div>
+            {{ render_crud_form(model, transaction_id) }}
         </div>
-        <!-- /.box-body -->
         <div class="box-footer">
-            <a class="btn btn-default" href="{{ path('app_model_index') }}">Go to list</a>
-            <button type="submit" class="btn btn-success pull-right">{% if model.id %}Edit{% else %}Create{% endif %}</button>
+            <a class="btn btn-default" href="{{ path('app_crud_index', {"modelId": model.id}) }}">Go to list</a>
+            <button type="submit" class="btn btn-success pull-right">{{ transaction_id ? "Update" : "Create" }}</button>
         </div>
-        <!-- /.box-footer -->
-    {{ form_end(form) }}
+    {{ end_crud_form() }}
 {% endblock %}
